@@ -137,17 +137,7 @@ The app sends city or weather-related requests to third-party services when thei
 - Web map providers for map rendering
 - NVIDIA NIM when optional generated insight is configured
 
-This local account implementation is suitable for a portfolio project or prototype, but it should be replaced with secure authentication and encrypted storage before production use.
-
-## Design Notes
-
-The interface uses a flat purple-and-white visual system with custom interaction details, including:
-
-- Long-press draggable segmented indicators
-- Snap and bounce behavior for floating detail/settings sheets
-- Card-based city browsing
-- Compact contextual menus
-- Dynamic hero imagery and responsive loading states
+This local account implementation is for a portfolio project or prototype, and should be replaced with secure authentication and encrypted storage before production use.
 
 ## Current Scope
 
