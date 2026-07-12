@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app_gradient"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/homeContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="24dp">
+
+        <TextView
+            android:id="@+id/location_recyclerview_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/album_text_secondary"
+            android:textSize="14sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCities"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingTop="112dp"
+            android:paddingBottom="150dp"
+            tools:listitem="@layout/item_city" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/emptyStateText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_empty_state_light"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/main_empty_login"
+        android:textColor="@color/weather_ink"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/homeHeaderShade"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_gravity="top"
+        android:background="@drawable/bg_home_header_fade" />
+
+    <LinearLayout
+        android:id="@+id/homeHeaderContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="52dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:id="@+id/homeTitleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home"
+            android:textColor="@color/weather_ink"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/profileChipContainer"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:elevation="12dp">
+
+            <ImageView
+                android:id="@+id/profileChipImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_purple_circle"
+                android:clipToOutline="true"
+                android:contentDescription="@string/cd_profile_photo"
+android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/profileChipText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_purple_circle"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/profile_initial_guest"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomHomeControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.skyshelf.app.DraggableSegmentedControl
+            android:id="@+id/navSegmentedControl"
+            android:layout_width="196dp"
+            android:layout_height="52dp"
+            android:elevation="12dp" />
+
+        <ImageButton
+            android:id="@+id/buttonSearch"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_purple_circle"
+            android:contentDescription="@string/cd_search_city"
+            android:elevation="12dp"
+            android:padding="14dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_search_24"
+            android:tint="@color/white" />
+    </LinearLayout>
+</FrameLayout>

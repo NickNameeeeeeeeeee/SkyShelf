@@ -1,0 +1,131 @@
+plugins {
+    id 'com.android.application'
+    id 'jacoco'
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { stream -> localProperties.load(stream) }
+}
+
+def readConfigValue = { String name ->
+    return localProperties.getProperty(name)
+            ?: System.getenv(name)
+            ?: ""
+}
+
+def escapeForBuildConfig = { String value ->
+    return value.replace('\\', '\\\\').replace('"', '\\"')
+}
+
+def openWeatherApiKey = escapeForBuildConfig(readConfigValue("OPEN_WEATHER_API_KEY"))
+def nvidiaNimApiKey = escapeForBuildConfig(readConfigValue("NVIDIA_NIM_API_KEY") ?: "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")
+def nvidiaNimModel = escapeForBuildConfig(readConfigValue("NVIDIA_NIM_MODEL") ?: "mistralai/mistral-large-3-675b-instruct-2512")
+def nvidiaNimBaseUrl = escapeForBuildConfig(readConfigValue("NVIDIA_NIM_BASE_URL") ?: "https://integrate.api.nvidia.com/v1")
+
+android {
+    namespace "com.skyshelf.app"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.skyshelf.app"
+        minSdk 29
+        targetSdk 35
+        versionCode 2
+        versionName "1.1"
+
+        buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${openWeatherApiKey}\""
+        buildConfigField "String", "NVIDIA_NIM_API_KEY", "\"${nvidiaNimApiKey}\""
+        buildConfigField "String", "NVIDIA_NIM_MODEL", "\"${nvidiaNimModel}\""
+        buildConfigField "String", "NVIDIA_NIM_BASE_URL", "\"${nvidiaNimBaseUrl}\""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_20
+        targetCompatibility JavaVersion.VERSION_20
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(20)
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
+    testOptions {
+        animationsDisabled true
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+        unitTests.returnDefaultValues = true
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*',
+                  '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+
+tasks.withType(Test).configureEach {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'androidx.webkit:webkit:1.12.1'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+    testImplementation 'org.mockito:mockito-core:5.14.2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+    testImplementation 'androidx.test:core:1.6.1'
+    testImplementation 'androidx.test.ext:junit:1.2.1'
+    testImplementation 'androidx.test:rules:1.6.1'
+    testImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.6.1'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.setFrom(files([mainSrc]))
+    classDirectories.setFrom(files([debugTree]))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ]))
+}

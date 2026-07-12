@@ -1,0 +1,12 @@
+# Copy this file to local.properties and fill these in locally.
+# Do not commit local.properties because it can contain private keys.
+sdk.dir=/path/to/Android/Sdk
+
+# Optional: Weather now uses Open-Meteo by default and does not require this key.
+OPEN_WEATHER_API_KEY=
+
+# Optional build-time defaults for AI Insights.
+# You can also paste/save these at runtime in the app's Settings screen.
+NVIDIA_NIM_API_KEY=
+NVIDIA_NIM_MODEL=
+NVIDIA_NIM_BASE_URL=

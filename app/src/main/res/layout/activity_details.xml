@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".DetailsActivity">
+
+    <ImageView
+        android:id="@+id/detailCityImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:contentDescription="@string/cd_city_photo"
+android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder" />
+
+    <ScrollView
+        android:id="@+id/detailScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:id="@+id/detailContentPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_detail_panel"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="34dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="42dp">
+
+            <TextView
+                android:id="@+id/detailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/weather_ink"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                tools:text="Chicago" />
+
+            <TextView
+                android:id="@+id/detailSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/album_text_secondary"
+                android:textSize="18sp"
+                tools:text="Illinois, US" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                app:cardBackgroundColor="#FFF4F5F7"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#12000000"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_current_weather_title"
+                        android:textColor="@color/album_text_secondary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/detailTemperatureText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_temperature_placeholder"
+                            android:textColor="@color/weather_ink"
+                            android:textSize="56sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/detailConditionText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="9dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="@string/detail_loading_weather"
+                            android:textColor="@color/weather_ink"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/detailUpdatedText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/detail_fetching_live_conditions"
+                        android:textColor="@color/album_text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/detailHumidityText"
+                    android:layout_width="0dp"
+                    android:layout_height="86dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_detail_card"
+                    android:gravity="center"
+                    android:text="@string/detail_humidity_placeholder"
+                    android:textColor="@color/weather_ink"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/detailWindText"
+                    android:layout_width="0dp"
+                    android:layout_height="86dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_detail_card"
+                    android:gravity="center"
+                    android:text="@string/detail_wind_placeholder"
+                    android:textColor="@color/weather_ink"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/detail_ai_insight_title"
+                android:textColor="@color/weather_ink"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailInsightText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_detail_card"
+                android:lineSpacingExtra="4dp"
+                android:padding="20dp"
+                android:text="@string/detail_loading_insight"
+                android:textColor="@color/weather_ink"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/detail_map_title"
+                android:textColor="@color/weather_ink"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#FFE9EEF4"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#12000000"
+                app:strokeWidth="1dp">
+
+                <android.webkit.WebView
+                    android:id="@+id/detailMapWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/detailBackButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_purple_circle"
+        android:contentDescription="@string/cd_back"
+        android:elevation="12dp"
+        android:padding="15dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_back_24"
+        android:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/detailDeleteButton"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/bg_purple_circle"
+        android:contentDescription="@string/cd_remove_city"
+        android:elevation="12dp"
+        android:padding="15dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_trash_24"
+        android:tint="@color/white" />
+</FrameLayout>
