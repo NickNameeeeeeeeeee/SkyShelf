@@ -52,7 +52,7 @@ The project is written in Java and focuses on a polished mobile experience with 
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/NickNameeeeeeeeeee/SkyShelf
 cd SkyShelf
 ```
 
